@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body>
+  <section class="section">
+      <div class="container">
+        <div class="columns">
+            <div class="column is-half">
+         <form method="POST" action="tw/">
+          {% csrf_token %}
+          <input style="margin-bottom: 0.5rem" name="body" class="input" placeholder="What do you want?" />
+          <input type="submit" class="button" value="Tweet" />
+         </form>
+            </div>
+        </div>
+          <div class="columns">
+    <div class="column is-half">
+            <p class="subtitle">Recent:</p>
+              {% for Tweet in Tweets %}
+                  <div class="card" style="border-radius: 5px; margin-bottom: 0.5rem">
+                  <div class="card-header">
+                  <a href="/profile/{{Tweet.author.id}}" style="font-size:25px">{{Tweet.author}}</a>
+                  </div>
+                  <p style="margin-top: 0.2rem; margin-bottom: 0.2rem"></p>
+                  <p class="card-text" style="font-size:20px">{{Tweet.body}}</p>
+                  <p style="font-size:11px">{{Tweet.time}}</p>
+                  <a href="/home/like/{{Tweet.id}}" style="font-size:11px">like({{Tweet.likes}})</a>
+                      {% if user.id is Tweet.author.id %}
+                      <a href="/home/delete/{{Tweet.id}}" style="font-size:11px">Delete</a>
+                      {% endif %}
+                      </div>
+              {% endfor %}
+
+            <hr />
+        <a href="/logout">Log Out</a>
+      </div>
+      <div class="column is-half">
+          <p class="subtitle">Hashtags:</p>
+          <div class="card">
+              <div class="card-content">
+                  {% for HashTag in HashTags %}
+                <div class="content">
+              <a href="/hashtag/{{HashTag.tag}}">{{HashTag.hashtag}}</a> <br />
+            {% endfor %}
+          </div>
+        </div>
+              </div>
+       </div>
+      </div>
+          </div>
+    </section>
+  </body>
+</html>

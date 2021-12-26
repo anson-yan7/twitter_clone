@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+  <body>
+  <section class="section">
+    <div class="container">
+<div class="columns">
+    <div class="column is-half">
+         <form method="GET" action="-2">
+          {% csrf_token %}
+          <input type="submit" class="button" value="Home" />
+        </form>
+    </div>
+  </div>
+  <div class="columns">
+      <div class="column is-half">
+          <p class="title">{{tag}}</p>
+              <p class="subtitle">Recent:</p>
+              {% for hashtag in HashTags %}
+              <div class="card" style="border-radius: 5px; margin-bottom: 0.5rem">
+                  <div class="card-header">
+                  <a href="/profile/{{hashtag.author.id}}" style="font-size:25px">{{hashtag.author}}</a>
+                  </div>
+                  <p style="margin-top: 0.2rem; margin-bottom: 0.2rem"></p>
+                <p class="card-text" style="font-size:20px">{{hashtag.body}}</p>
+                  <p style="font-size:11px">{{hashtag.time}}</p>
+                  <a href="/hashtag/like/{{hashtag.id}}/{{fulltag}}" style="font-size:11px">like({{hashtag.likes}})</a>
+                  {% if user.id is hashtag.author.id %}
+                      <a href="/hashtag/delete/{{hashtag.id}}/{{fulltag}}" style="font-size:11px">Delete</a>
+                      {% endif %}
+                  </div>
+              {% endfor %}
+            <hr />
+          <div><a href="/logout">Log Out</a></div>
+    </div>
+
+      </div>
+    </div>
+    </section>
+  </body>
+</html>

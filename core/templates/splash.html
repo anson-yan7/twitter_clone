@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.5">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Your Twitter
+      </h1>
+      <h2 class="subtitle">
+        Tweet whatever you want. There is no rule.
+      </h2>
+    </div>
+  </div>
+      <div class="column is-half">
+        <h1 class="subtitle">Sign Up</h1>
+        <form class="field" method="POST" action="signup/">
+            {% csrf_token %}
+            <input class="input" name="username" placeholder="username" />
+            <input class="input" name="password" placeholder="password" type="password" />
+            <input class="input button" value="Create Account" type="submit" />
+        </form>
+    </div>
+    <div class="column is-half">
+        <h1 class="subtitle">Log In</h1>
+        <form class="field" method="POST" action="login/">
+            {% csrf_token %}
+            <input class="input" name="username" placeholder="username" />
+            <input class="input" name="password" placeholder="password" type="password" />
+            <input class="input button" value="Enter" type="submit" />
+        </form>
+    </div>
+    </div>
+
+
+  </section>
+  </body>
+</html>
